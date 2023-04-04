@@ -15,6 +15,7 @@ import updateController from '../controllers/auth/update.js'
 const {sign_up, sign_in, sign_out, sign_in_token} = controller
 const { upd } = updateController
 
+
 let router = express.Router();
 
 
@@ -24,5 +25,5 @@ router.post('/signout', passport.authenticate('jwt',{session:false}), sign_out)
 router.post('/signintoken', passport.authenticate('jwt',{session:false}), sign_in_token)
 router.put("/update", passport.authenticate("jwt", { session: false }), validator(schemaUpd), upd)
 
-// module.exports = router;
+
 export default router
