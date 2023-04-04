@@ -1,7 +1,10 @@
 import Shop from '../../models/Shop.js'
 
 async function alreadyExists(req, res, next) {
-    const shop = await Shop.findOne({ user_id: req.user._id })
+
+    try{
+        const shop = await Shop.findOne({ user_id: req.user._id })
+
     if(shop){
         if(shop.active){
             return res.status(400).json({
@@ -20,6 +23,10 @@ async function alreadyExists(req, res, next) {
         }
     } else{
         next()
+    }
+
+    }catch(error){
+        next(error)
     }
 
 }
