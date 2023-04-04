@@ -8,8 +8,8 @@ const controller = {
     sign_up: async(req,res,next) => {
         req.body.is_online = false
         req.body.is_admin = false
-        req.body.is_author = false
-        req.body.is_company = false
+        req.body.is_seller = false
+        req.body.photo = "https://png.pngtree.com/png-vector/20191003/ourmid/pngtree-cyber-man-icon-isolated-on-abstract-background-png-image_1779361.jpg"
         req.body.is_verified = true
         req.body.verify_code = Crypto.randomBytes(10).toString('hex')
         req.body.password = bcryptjs.hashSync(req.body.password, 10)
@@ -17,7 +17,7 @@ const controller = {
             await User.create(req.body)
             return res.status(200).json({
                 succes: true,
-                message:'user registered!'
+                message:'User Registered!'
             })    
         } catch (error) {
             next(error)
@@ -39,7 +39,7 @@ const controller = {
                 )
             return res.status(200).json({
                 succes: true,
-                message:'logged in user!',
+                message:'Logged in!',
                 user,
                 token
             })
@@ -58,7 +58,7 @@ const controller = {
             )
             return res.status(200).json({
                 succes: true,
-                message:'offline user!'})
+                message:'Offline user!'})
         } catch (error) {
             next(error)
         }
@@ -75,7 +75,7 @@ const controller = {
             const token = res.token
             return res.status(200).json({
                 succes: true,
-                message:'logged in user!'
+                message:'Logged in!'
             })
         } catch (error) {
             next(error)
