@@ -2,7 +2,6 @@ import express from "express"
 import schema from "../schemas/products.js"
 import ProductController from "../controllers/products/create.js"
 import UpdateControler from "../controllers/products/Update.js"
-import getAllController from "../controllers/products/get_all.js"
 import getOneController from "../controllers/products/get_one.js"
 import destroyController from "../controllers/products/destroy.js"
 import destroyAllController from '../controllers/products/destroy_all.js'
@@ -20,8 +19,7 @@ let router = express.Router();
 
 router.post('/create', passport.authenticate('jwt',{session:false}), alreadyExists, validator(schema),is_activeMe, create)
 router.put("/update/:id", passport.authenticate('jwt',{session:false}), validator(schema), is_activeMe, update)
-router.get("/", passport.authenticate('jwt',{session:false}), is_activeMe, getAllController )
-router.get('/:id', passport.authenticate("jwt", { session:false }), is_activeMe, getOneController)
+router.get('/:id', getOneController)
 router.delete('/delete-all', passport.authenticate("jwt", { session:false }), is_activeMe, destroy_all)
 router.delete("/delete/:id", passport.authenticate("jwt", { session:false }), is_activeMe, destroy)
 
