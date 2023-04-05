@@ -3,7 +3,7 @@ import Product from "../../models/Product.js"
 
 async function alreadyExists(req, res, next) {
     try{
-        const shop = await Shop.findOne({ user_id: req.user._id })
+        const shop = await Shop.findOne({ _id: req.params.id })
 
         if(shop){
             const Products = await Product.find({ store_id: shop._id})

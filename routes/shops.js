@@ -12,6 +12,7 @@ import passport from '../middlewares/passport.js';
 import alreadyExists from '../middlewares/shops/alreadyExists.js'
 import is_activeMe from '../middlewares/shops/is_activeMe.js'
 import is_active from '../middlewares/shops/is_active.js'
+import getAllProductsController from "../controllers/products/get_all.js"
 
 const { create } = createController
 const { me } = getMeController
@@ -29,6 +30,7 @@ router.get('/me', passport.authenticate("jwt", { session:false }), is_activeMe, 
 router.put('/update', passport.authenticate("jwt", { session:false }), validator(schema), is_activeMe, update)
 router.put('/desactivate', passport.authenticate("jwt", { session:false }), desactivate)
 router.delete('/delete', passport.authenticate("jwt", { session:false }), destroy)
+router.get("/:id/products", getAllProductsController )
 router.get('/:id', passport.authenticate("jwt", { session:false }), is_active, get_one)
 
 export default router
