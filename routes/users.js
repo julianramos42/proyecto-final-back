@@ -1,6 +1,6 @@
 import express from 'express'
 import validator from '../middlewares/validator.js'
-import schema from '../schemas/users.js'
+import schema_signup from '../schemas/sign_up.js'
 import schemaUpd from '../schemas/updateUser.js'
 import schema_signin from '../schemas/sign_in.js'
 import controller from '../controllers/auth/auth.js'
@@ -19,7 +19,7 @@ const { upd } = updateController
 let router = express.Router();
 
 
-router.post('/signup', validator(schema), accountExistsSignUp, sign_up)
+router.post('/signup', validator(schema_signup), accountExistsSignUp, sign_up)
 router.post('/signin', validator(schema_signin), accountExistsSignIn,accountHasBeenVerified, passwordIsOk, sign_in )
 router.post('/signout', passport.authenticate('jwt',{session:false}), sign_out) 
 router.post('/signintoken', passport.authenticate('jwt',{session:false}), sign_in_token)
