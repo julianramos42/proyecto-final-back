@@ -31,6 +31,6 @@ router.put('/update', passport.authenticate("jwt", { session:false }), validator
 router.put('/desactivate', passport.authenticate("jwt", { session:false }), desactivate)
 router.delete('/delete', passport.authenticate("jwt", { session:false }), destroy)
 router.get("/:id/products", getAllProductsController )
-router.get('/:id', passport.authenticate("jwt", { session:false }), is_active, get_one)
+router.get('/:id', is_active, get_one)
 
 export default router
