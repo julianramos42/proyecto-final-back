@@ -29,9 +29,8 @@ const controller = {
         if (req.query.sort){
             sort = req.query.sort
         }
-        console.log(sort);
         try{
-            let get_products = await Product.find(filter)
+            let get_products = await Product.find({...filter,store_id: req.query.store_id})
                 .select('name photo price description stock category _id')
                 .sort({name:sort})
                 // .sort({title:1})
