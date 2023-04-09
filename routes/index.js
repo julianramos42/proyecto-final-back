@@ -3,6 +3,7 @@ import paymentRouter from '../routes/payment.js'
 import userRouter from '../routes/users.js'
 import shopsRouter from '../routes/shops.js'
 import productsRouter from "../routes/products.js"
+import favoritesRouter from '../routes/favorites.js';
 
 let router = express.Router();
 
@@ -15,5 +16,7 @@ router.use('/auth',userRouter)
 router.use('/shop', shopsRouter)
 router.use('/payment', paymentRouter)
 router.use('/product', productsRouter)
+router.use('/favorites', favoritesRouter);
 
 export default router
+
