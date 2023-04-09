@@ -1,7 +1,7 @@
 import Shop from '../../models/Shop.js'
 import Product from "../../models/Product.js"
 
-async function alreadyExists(req, res, next) {
+async function get_all(req, res, next) {
     let filter = {}
     let sort 
     // let pagination = {
@@ -63,4 +63,4 @@ async function alreadyExists(req, res, next) {
     }
 }
 
-export default alreadyExists
+export default get_all

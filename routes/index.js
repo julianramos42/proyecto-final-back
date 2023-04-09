@@ -1,8 +1,8 @@
 import express from 'express'
-import paymentRouter from '../routes/payment.js'
-import userRouter from '../routes/users.js'
-import shopsRouter from '../routes/shops.js'
-import productsRouter from "../routes/products.js"
+import paymentRouter from './payment.js'
+import userRouter from './users.js'
+import shopsRouter from './shops.js'
+import productsRouter from "./products.js"
 
 let router = express.Router();
 

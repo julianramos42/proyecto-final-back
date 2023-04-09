@@ -9,7 +9,7 @@ const schema = new mongoose.Schema(
         description: { type: String, require: true },
         photo: { type: String, require: true },
         banner: { type: String, require: true },
-        user_id: { type: mongoose.Types.ObjectId, ref: 'users', require: true },
+        user_id: { type: mongoose.Types.ObjectId, ref: 'users', required: true },
         active: { type: Boolean, require: false }
     },{
         timestamps: true
