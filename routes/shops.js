@@ -13,6 +13,13 @@ import alreadyExists from '../middlewares/shops/alreadyExists.js'
 import is_activeMe from '../middlewares/shops/is_activeMe.js'
 import is_active from '../middlewares/shops/is_active.js'
 import getAllProductsController from "../controllers/products/get_all.js"
+// CART
+import createCartProductController from '../controllers/products_in_carts/create.js'
+import getAllProductsInCart from '../controllers/products_in_carts/get_all.js'
+import destroy_one_product from '../controllers/products_in_carts/destroy_one.js'
+import destroy_all_product from '../controllers/products_in_carts/destroy_all.js'
+import alreadyExistsProduct from '../middlewares/products_in_carts/alreadyExists.js'
+// 
 
 const { create } = createController
 const { me } = getMeController
@@ -21,16 +28,23 @@ const { get_all } = getAllController
 const { update } = updateController
 const { desactivate } = desactivateController
 const { destroy } = destroyController
+const {createCartProduct} = createCartProductController
 
 let router = express.Router()
 
 router.post('/create', passport.authenticate("jwt", { session:false }), alreadyExists, validator(schema), create)
 router.get('/', get_all)
 router.get('/me', passport.authenticate("jwt", { session:false }), is_activeMe, me)
+router.get("/:id/products", getAllProductsController )
+router.get('/:id', is_active, get_one)
 router.put('/update', passport.authenticate("jwt", { session:false }), validator(schema), is_activeMe, update)
 router.put('/desactivate', passport.authenticate("jwt", { session:false }), desactivate)
 router.delete('/delete', passport.authenticate("jwt", { session:false }), destroy)
-router.get("/:id/products", getAllProductsController )
-router.get('/:id', is_active, get_one)
+// CART
+router.post('/:id/createcartproduct', passport.authenticate("jwt", { session:false }), alreadyExistsProduct, createCartProduct)
+router.get('/:id/cart', passport.authenticate("jwt", { session:false }), getAllProductsInCart)
+router.delete('/cart/deleteone/:productid', passport.authenticate("jwt", { session:false }), destroy_one_product )
+router.delete('/:id/cart/deleteall', passport.authenticate("jwt", { session:false }), destroy_all_product )
+// 
 
 export default router
