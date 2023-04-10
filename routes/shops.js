@@ -19,6 +19,8 @@ import getAllProductsInCart from '../controllers/products_in_carts/get_all.js'
 import destroy_one_product from '../controllers/products_in_carts/destroy_one.js'
 import destroy_all_product from '../controllers/products_in_carts/destroy_all.js'
 import alreadyExistsProduct from '../middlewares/products_in_carts/alreadyExists.js'
+import updateCartController from '../controllers/products_in_carts/update.js'
+import updateSchema from '../schemas/product_in_cart.js'
 // 
 
 const { create } = createController
@@ -29,6 +31,7 @@ const { update } = updateController
 const { desactivate } = desactivateController
 const { destroy } = destroyController
 const {createCartProduct} = createCartProductController
+const { updateCart } = updateCartController
 
 let router = express.Router()
 
@@ -43,6 +46,7 @@ router.delete('/delete', passport.authenticate("jwt", { session:false }), destro
 // CART
 router.post('/:id/createcartproduct', passport.authenticate("jwt", { session:false }), alreadyExistsProduct, createCartProduct)
 router.get('/:id/cart', passport.authenticate("jwt", { session:false }), getAllProductsInCart)
+router.put('/cart/update/:productid', passport.authenticate("jwt", { session:false }), validator(updateSchema), updateCart )
 router.delete('/cart/deleteone/:productid', passport.authenticate("jwt", { session:false }), destroy_one_product )
 router.delete('/:id/cart/deleteall', passport.authenticate("jwt", { session:false }), destroy_all_product )
 // 
