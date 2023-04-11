@@ -29,7 +29,7 @@ const schema = Joi.object({
     .min(8)
     .email({ minDomainSegments: 2 })
     .messages({
-      "string.min": "The password must have at least 8 characteres",
+      "string.min": "The email must have at least 8 characteres",
       'string.empty': 'The email cannot be empty',
       'any.required': 'A email is required',
     }),
