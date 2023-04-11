@@ -5,7 +5,7 @@ import jsonwebtoken from 'jsonwebtoken'
 
 const controller = {
 
-    sign_up: async(req,res,next) => {
+    sign_up: async (req, res, next) => {
         req.body.is_online = false
         req.body.is_admin = false
         req.body.is_seller = false
@@ -19,8 +19,8 @@ const controller = {
             return res.status(201).json({
 
                 succes: true,
-                message:'User Registered!'
-            })    
+                message: 'User Registered!'
+            })
         } catch (error) {
             next(error)
         }
@@ -35,13 +35,13 @@ const controller = {
             )
             user.password = null //para proteger la contraseña
             const token = jsonwebtoken.sign(
-                {id: user._id},
+                { id: user._id },
                 process.env.SECRET,
-                {expiresIn: 60*60*48}
-                )
+                { expiresIn: 60 * 60 * 24 * 7 }
+            )
             return res.status(200).json({
                 succes: true,
-                message:'Logged in!',
+                message: 'Logged in!',
                 user,
                 token
             })
@@ -60,7 +60,8 @@ const controller = {
             )
             return res.status(200).json({
                 succes: true,
-                message:'Offline user!'})
+                message: 'Offline user!'
+            })
         } catch (error) {
             next(error)
         }
@@ -74,10 +75,16 @@ const controller = {
                 { new: true } //para que devuelva el objeto modificado
             )
             user.password = null //para proteger la contraseña
-            const token = res.token
+            const token = jsonwebtoken.sign(
+                { id: user._id },
+                process.env.SECRET,
+                { expiresIn: 60 * 60 * 24 * 7 }
+            )
             return res.status(200).json({
                 succes: true,
-                message:'Logged in!'
+                message: 'Logged in!',
+                user,
+                token
             })
         } catch (error) {
             next(error)
