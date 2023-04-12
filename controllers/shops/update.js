@@ -10,6 +10,7 @@ const controller = {
             )
             if(shop){
                 return res.status(200).json({
+                    message: "Shop updated",
                     success: true,
                     shop
                 })
