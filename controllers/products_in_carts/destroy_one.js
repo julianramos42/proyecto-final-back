@@ -2,7 +2,7 @@ import Product_in_carts from '../../models/Product_in_carts.js'
 
 async function destroy_one(req, res, next) {
     try {
-        let product = await Product_in_carts.findOneAndDelete({ _id: req.params.productid, user_id: req.user.id })
+        let product = await Product_in_carts.findOneAndDelete({ _id: req.params.productid, user_id: req.user._id })
         if (product) {
             return res.status(200).json({
                 success: true,

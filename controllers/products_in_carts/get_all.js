@@ -5,7 +5,7 @@ async function get_all(req, res, next) {
     try{
         let shop = await Shop.findOne({ _id: req.params.id })
         if(shop){
-            let products = await Product_in_carts.find({ store_id: shop._id, user_id: req.user.id })
+            let products = await Product_in_carts.find({ store_id: shop._id, user_id: req.user._id })
             if(products){
                 return res.status(200).json({
                     success: true,

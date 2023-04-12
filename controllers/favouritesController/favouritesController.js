@@ -19,7 +19,7 @@ const controller = {
 
   addFavourites: async (req, res, next) => {
     try {
-      req.body.user_id = req.user.id;
+      req.body.user_id = req.user._id;
       req.body.store_id = req.params.shopid;
       const favourites = await Favourite.find({
         store_id: req.params.shopid,
@@ -45,7 +45,7 @@ const controller = {
     try {
       await Favourite.findByIdAndDelete({
         store_id: req.params.shopid,
-        user_id: req.user.id,
+        user_id: req.user._id,
       });
       return res.status(200).json({
         success: true,
@@ -58,7 +58,7 @@ const controller = {
 
   deleteAll: async (req, res, next) => {
     try {
-      await Favourite.deleteMany({ user_id: req.user.id });
+      await Favourite.deleteMany({ user_id: req.user._id });
       return res.status(200).json({
         success: true,
         message: "Favourites clear",

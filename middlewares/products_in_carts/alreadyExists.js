@@ -6,17 +6,17 @@ async function alreadyExists(req, res, next) {
             const shop = await Shop.findOne({ _id: req.params.id })
             if (shop){
 
-                const existsProduct = await Product_in_carts.findOne({ name: req.body.name, store_id: shop._id})
+                const existsProduct = await Product_in_carts.findOne({ title: req.body.title, store_id: shop._id})
                 
                 if (existsProduct){
-                    let stock = existsProduct.stock + req.body.stock
+                    let quantity = existsProduct.quantity + req.body.quantity
                     const product = await Product_in_carts.findOneAndUpdate(
                         { _id: existsProduct._id },
-                        {stock: stock },
+                        {quantity: quantity },
                         {new:true})
                     return res.status(200).json({
                         success: true,
-                        message: "Product already exists, the stock is added "
+                        message: "Product already exists, the quantity is added "
                         })
                 }else{
                     next()
