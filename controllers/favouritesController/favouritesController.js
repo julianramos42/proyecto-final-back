@@ -43,7 +43,7 @@ const controller = {
 
   deleteFavourite: async (req, res, next) => {
     try {
-      await Favourite.findByIdAndDelete({
+      await Favourite.findOneAndDelete({
         store_id: req.params.shopid,
         user_id: req.user.id,
       });
