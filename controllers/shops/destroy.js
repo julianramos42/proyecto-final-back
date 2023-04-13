@@ -1,23 +1,29 @@
 import Shop from "../../models/Shop.js";
 import Product from "../../models/Product.js"
+import User from '../../models/User.js'
 
 const controller = {
-    destroy: async (req,res,next) => {
-        try{
+    destroy: async (req, res, next) => {
+        try {
             let shop = await Shop.findOneAndDelete({ user_id: req.user._id })
-            if(shop){
-                await Product.deleteMany({store_id: shop._id})
+            if (shop) {
+                await Product.deleteMany({ store_id: shop._id })
+                await User.findOneAndUpdate(
+                    { _id: req.user._id },
+                    { is_seller: false },
+                    { new: true }
+                )
                 return res.status(200).json({
                     success: true,
                     message: 'Shop deleted successfully'
                 })
-            }else{
+            } else {
                 return res.status(404).json({
                     success: false,
                     message: 'Shop not found'
                 })
             }
-        }catch(err){
+        } catch (err) {
             next(err)
         }
     }

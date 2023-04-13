@@ -1,26 +1,22 @@
 import mercadopago from 'mercadopago'
 import express from 'express'
 import cors from "cors";
+import createController from '../controllers/payments/create.js'
+import passport from '../middlewares/passport.js';
+import alreadyExists from '../middlewares/payments/alreadyExists.js'
 
 let router = express.Router();
 
+const { create } = createController
+
 //mercadopago
-mercadopago.configure({access_token: process.env.MERCADOPAGO_KEY})
 router.post("/",cors(), (req, res) => {
-  const product = req.body
+  mercadopago.configure({access_token: req.body.token})
+
     let preference = {
-      items: [
-        {
-          id: 123,
-          title: product.title,
-          currency_id: "ARS",
-          unit_price: product.price,
-          picture_url: product.image_pay,
-          quantity: 1,
-        },
-      ],
+      items: req.body.products,
       back_urls: {
-        success: "http://localhost:3000/",
+        success: `http://localhost:3000/shop/${req.body.shopId}`,
         failure: "",
         pending: "",
       },
@@ -32,5 +28,7 @@ router.post("/",cors(), (req, res) => {
       .then((response) => res.status(200).json({ response }))
       .catch((error) => res.status(400).json({ error: error.message }));
   });
+
+  router.post('/:shopid', passport.authenticate("jwt", { session:false }), alreadyExists, create )
   
   export default router;
