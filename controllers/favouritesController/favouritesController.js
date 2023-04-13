@@ -23,6 +23,7 @@ const controller = {
       req.body.store_id = req.params.shopid;
       const favourites = await Favourite.find({
         store_id: req.params.shopid,
+        user_id:req.user._id
       }).populate("store_id");
       if (!favourites.length) {
         await Favourite.create(req.body);
@@ -43,9 +44,9 @@ const controller = {
 
   deleteFavourite: async (req, res, next) => {
     try {
-      await Favourite.findByIdAndDelete({
+      await Favourite.findOneAndDelete({
         store_id: req.params.shopid,
-        user_id: req.user.id,
+        user_id: req.user._id,
       });
       return res.status(200).json({
         success: true,
