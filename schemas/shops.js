@@ -58,6 +58,19 @@ const schema = Joi.object({
                 'any.required': 'A description is required',
             }
         ),
+    token: Joi
+        .string()
+        .required()
+        .min(10)
+        .max(200)
+        .messages(
+            {
+                'string.min': 'The token must be at least 10 characters',
+                'string.max': 'The token cannot exceed 200 characters',
+                'string.empty': 'The token cannot be empty',
+                'any.required': 'A token is required',
+            }
+        ),
     photo: Joi
         .string()
         .required()
