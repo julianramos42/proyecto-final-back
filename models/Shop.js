@@ -7,6 +7,7 @@ const schema = new mongoose.Schema(
         city: { type: String, require: true },
         country: { type: String, require: true },
         description: { type: String, require: true },
+        token: { type: String, require: true },
         photo: { type: String, require: true },
         banner: { type: String, require: true },
         user_id: { type: mongoose.Types.ObjectId, ref: 'users', required: true },

@@ -19,11 +19,15 @@ const controller = {
 
   addFavourites: async (req, res, next) => {
     try {
-      req.body.user_id = req.user.id;
+      req.body.user_id = req.user._id;
       req.body.store_id = req.params.shopid;
       const favourites = await Favourite.find({
         store_id: req.params.shopid,
+<<<<<<< HEAD
         user_id:req.user._id
+=======
+        user_id: req.user._id
+>>>>>>> 05d80cc841c5d6856b5ded254bf20d1685547953
       }).populate("store_id");
       if (!favourites.length) {
         await Favourite.create(req.body);
@@ -59,7 +63,7 @@ const controller = {
 
   deleteAll: async (req, res, next) => {
     try {
-      await Favourite.deleteMany({ user_id: req.user.id });
+      await Favourite.deleteMany({ user_id: req.user._id });
       return res.status(200).json({
         success: true,
         message: "Favourites clear",

@@ -6,7 +6,7 @@ const controller = {
         try{
             let shop = await Shop.findOne({_id: req.params.id})
             req.body.store_id= shop._id
-            req.body.user_id = req.user.id
+            req.body.user_id = req.user._id
 
             await Product_in_carts.create(req.body)
             return res.status(201).json({
