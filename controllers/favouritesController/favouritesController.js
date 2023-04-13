@@ -23,11 +23,7 @@ const controller = {
       req.body.store_id = req.params.shopid;
       const favourites = await Favourite.find({
         store_id: req.params.shopid,
-<<<<<<< HEAD
-        user_id:req.user._id
-=======
         user_id: req.user._id
->>>>>>> 05d80cc841c5d6856b5ded254bf20d1685547953
       }).populate("store_id");
       if (!favourites.length) {
         await Favourite.create(req.body);
