@@ -17,6 +17,6 @@ router.get('/products', passport.authenticate('jwt',{session:false}), is_admin, 
 router.delete('/products/delete/:productid', passport.authenticate('jwt',{session:false}), is_admin, deleteProduct)
 router.get('/shops', passport.authenticate('jwt',{session:false}), is_admin, getShops)
 router.put('/shops/desactivate/:shopid', passport.authenticate('jwt',{session:false}), is_admin, desactivateShop)
-router.delete('/shops/delete/:shopid', passport.authenticate('jwt',{session:false}), is_admin, deleteShop)
+router.delete('/shops/delete/:shopid/:userid', passport.authenticate('jwt',{session:false}), is_admin, deleteShop)
 
 export default router
