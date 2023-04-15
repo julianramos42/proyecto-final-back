@@ -2,6 +2,7 @@ import User from '../../models/User.js'
 import Crypto from 'crypto'
 import bcryptjs from 'bcryptjs'
 import jsonwebtoken from 'jsonwebtoken'
+import createMailTransporter from '../../config/mailer.js'
 
 const controller = {
 
@@ -10,11 +11,15 @@ const controller = {
         req.body.is_admin = false
         req.body.is_seller = false
         req.body.photo = "https://png.pngtree.com/png-vector/20191003/ourmid/pngtree-cyber-man-icon-isolated-on-abstract-background-png-image_1779361.jpg"
-        req.body.is_verified = true
+        req.body.is_verified = false
         req.body.verify_code = Crypto.randomBytes(10).toString('hex')
         req.body.password = bcryptjs.hashSync(req.body.password, 10)
         try {
-            await User.create(req.body)
+            const user = await User.create(req.body)
+
+            createMailTransporter(user)//envio del mail para verificacion
+            .then(info => console.log(info))
+            .catch(error => console.log(error))
 
             return res.status(201).json({
 
@@ -90,6 +95,40 @@ const controller = {
             next(error)
         }
     },
+
+    verifyMail: async(req,res,next) => {
+        try{
+            const verify_code = req.query.verify_code
+            if (!verify_code) return res.status(404).json('Verify Code not found...')
+
+            const user = await User.findOne({verify_code})
+            console.log(user);
+            if (user){
+                user.verify_code = null
+                user.is_verified = true
+
+                await user.save()
+
+                const token = jsonwebtoken.sign(
+                    {id: user._id}, //datos a encriptar
+                    process.env.SECRET, //llave para poder encriptar y luego desencriptar
+                    { expiresIn: 60*60*24*7 } //tiempo de expiracion en segundos
+                ) 
+
+                res.status(200).json({
+                    _id: user._id,
+                    name: user.name,
+                    mail: user.email,
+                    token,
+                    is_verified: user?.is_verified
+                })
+            }else res.status(404).json('Mail verification failed, invalid token')
+
+        }catch(error){
+            console.log(error)
+            res.status(500).json(error.message)
+        }
+    } 
 }
 
 export default controller
