@@ -17,7 +17,7 @@ async function createMailTransporter (user) {
     // send mail with defined transport object
     let info = await transporter.sendMail({
         from: '"Lance" <LanceApp4@gmail.com>',
-        to: user.mail,
+        to: user.email,
         subject:"Verify your email...",
         html: `<table align="center" border="0" cellpadding="0" cellspacing="0" class="m_-5401722008193577908deviceWidth" style="width:100%;min-width:100%" width="100%">
         <tbody><tr>
