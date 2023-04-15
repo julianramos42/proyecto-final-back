@@ -20,7 +20,7 @@ async function createMailTransporterPay (userPayment) {
 
     let productsList = "";
     products.forEach((product) => {
-      productsList += `<li>${product.title} - ${product.unit_price}</li>`;
+      productsList += `<li>${product.title} - $${product.unit_price}</li>`;
     });
   
     // send mail with defined transport object
