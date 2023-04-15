@@ -11,7 +11,7 @@ const schema = new mongoose.Schema(
         is_admin: { type: Boolean, required: true },
         is_seller: { type: Boolean, required: false },
         is_verified: { type: Boolean, required: true },
-        verify_code: { type: String, required: true }
+        verify_code: { type: String, required: false }
     },{
         timestamps: true
     }

@@ -1,12 +1,14 @@
 import Shop from "../../models/Shop.js";
 import Product from "../../models/Product.js"
 import User from '../../models/User.js'
+import Favourite from '../../models/Favourites.js'
 
 const controller = {
     destroy: async (req, res, next) => {
         try {
             let shop = await Shop.findOneAndDelete({ user_id: req.user._id })
             if (shop) {
+                await Favourite.deleteMany({store_id: shop._id})
                 await Product.deleteMany({ store_id: shop._id })
                 await User.findOneAndUpdate(
                     { _id: req.user._id },
