@@ -1,5 +1,5 @@
 import nodemailer from 'nodemailer'
-import User from "../models/User";
+import User from "../models/User.js";
 import Shop from "../models/Shop.js";
 
 async function createMailTransporterPay (userPayment) {
@@ -20,21 +20,21 @@ async function createMailTransporterPay (userPayment) {
 
     let productsList = "";
     products.forEach((product) => {
-      productsList += `<li>${product.name} - ${product.price}</li>`;
+      productsList += `<li>${product.title} - $${product.unit_price}</li>`;
     });
   
     // send mail with defined transport object
     let info = await transporter.sendMail({
         from: '"Lance" <LanceApp4@gmail.com>',
         to: email,
-        subject:"Verify your email...",
+        subject:"Purchase details...",
         html: `<p>Hi ${user.name},</p>
         <p>Thank you for your purchase at ${shop.name}!</p>
         <p>Here's a summary of your order:</p>
         <ul>
           ${productsList}
         </ul>
-        <p>Total: ${totalValue}</p>
+        <p>Total: $${totalValue}</p>
         <img src="${shop.photo}" alt="${shop.name}" width="200px" />
         <p>Best regards,</p>
         <p>The Lance Team</p>`
