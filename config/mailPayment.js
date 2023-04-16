@@ -46,9 +46,9 @@ async function createMailTransporterPay (userPayment) {
                         <div style="height:208px;width:100%;background-color:#161616;display:flex;">
                             <div style="width:430px;height:208px">
                 
-                                <h2 style="font-family:'Montserrat', sans-serif;font-weight: 400;font-size: 16px;color: white;padding-left: 100px;padding-top: 30px;">you bought in the store ${shop.name}</h2>
+                                <h2 style="font-family:'Montserrat', sans-serif;font-weight: 400;font-size: 16px;color: white;padding-left: 100px;padding-top: 30px;">You bought in the store ${shop.name}</h2>
                 
-                                <h2 style="font-family:'Montserrat', sans-serif;font-weight: 700;font-size: 20px;color: white;padding-left: 100px;">arrives within 15 days</h2>
+                                <h2 style="font-family:'Montserrat', sans-serif;font-weight: 700;font-size: 20px;color: white;padding-left: 100px;">Arrives within 15 days</h2>
                 
                             </div>
                             <div style="width:184px;height:208px">
