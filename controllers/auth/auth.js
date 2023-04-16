@@ -18,11 +18,10 @@ const controller = {
             const user = await User.create(req.body)
 
             createMailTransporter(user)//envio del mail para verificacion
-            .then(info => console.log(info))
-            .catch(error => console.log(error))
+                .then(info => console.log(info))
+                .catch(error => console.log(error))
 
             return res.status(201).json({
-
                 succes: true,
                 message: 'User Registered!'
             })
@@ -96,24 +95,24 @@ const controller = {
         }
     },
 
-    verifyMail: async(req,res,next) => {
-        try{
+    verifyMail: async (req, res, next) => {
+        try {
             const verify_code = req.query.verify_code
             if (!verify_code) return res.status(404).json('Verify Code not found...')
 
-            const user = await User.findOne({verify_code})
-            console.log(user);
-            if (user){
-                user.verify_code = null
+            const user = await User.findOne({ verify_code })
+
+            if (user) {
+                user.verify_code = ''
                 user.is_verified = true
 
                 await user.save()
 
                 const token = jsonwebtoken.sign(
-                    {id: user._id}, //datos a encriptar
+                    { id: user._id }, //datos a encriptar
                     process.env.SECRET, //llave para poder encriptar y luego desencriptar
-                    { expiresIn: 60*60*24*7 } //tiempo de expiracion en segundos
-                ) 
+                    { expiresIn: 60 * 60 * 24 * 7 } //tiempo de expiracion en segundos
+                )
 
                 res.status(200).json({
                     _id: user._id,
@@ -122,13 +121,13 @@ const controller = {
                     token,
                     is_verified: user?.is_verified
                 })
-            }else res.status(404).json('Mail verification failed, invalid token')
+            } else res.status(404).json('Mail verification failed, invalid token')
 
-        }catch(error){
+        } catch (error) {
             console.log(error)
             res.status(500).json(error.message)
         }
-    } 
+    }
 }
 
 export default controller
