@@ -82,7 +82,7 @@ async function createMailTransporterPay (userPayment) {
                         </div>
                     </div>
                     <div style="width:433px;height:20%;display: flex;justify-content: center;align-items: center;">
-                        <a style="text-decoration: none;font-family:'Montserrat', sans-serif;font-weight: 700;font-size: 16px;color: white;padding: 21px 75px;background: #161616;border-radius: 14px;" href="https://www.youtube.com/?app">SEE MORE PRODUCTS</a>
+                        <a style="text-decoration: none;font-family:'Montserrat', sans-serif;font-weight: 700;font-size: 16px;color: white;padding: 21px 75px;background: #161616;border-radius: 14px;" href="${process.env.CLIENT_URL}/shops">SEE MORE PRODUCTS</a>
                     </div>
                     
                 </div>
