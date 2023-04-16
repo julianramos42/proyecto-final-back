@@ -20,11 +20,7 @@ async function createMailTransporterPay (userPayment) {
 
     let productsList = "";
     products.forEach((product) => {
-<<<<<<< HEAD
       productsList += `<li style="font-family:'Montserrat', sans-serif;font-weight: 400;font-size: 12px;color:#495464;margin-bottom: 5px;">${product.title} - $${product.unit_price}</li>`;
-=======
-      productsList += `<li>${product.title} - $${product.unit_price}</li>`;
->>>>>>> 8e0d7ef5c762280cba62d84509b854e2d4151a0b
     });
   
     // send mail with defined transport object
@@ -32,7 +28,6 @@ async function createMailTransporterPay (userPayment) {
         from: '"Lance" <LanceApp4@gmail.com>',
         to: email,
         subject:"Purchase details...",
-<<<<<<< HEAD
         html: `<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 
         <div style="margin:0;padding:0;display: flex;justify-content:center;align-items: center;" width="100%">
@@ -96,18 +91,6 @@ async function createMailTransporterPay (userPayment) {
         
         </div>
         `
-=======
-        html: `<p>Hi ${user.name},</p>
-        <p>Thank you for your purchase at ${shop.name}!</p>
-        <p>Here's a summary of your order:</p>
-        <ul>
-          ${productsList}
-        </ul>
-        <p>Total: $${totalValue}</p>
-        <img src="${shop.photo}" alt="${shop.name}" width="200px" />
-        <p>Best regards,</p>
-        <p>The Lance Team</p>`
->>>>>>> 8e0d7ef5c762280cba62d84509b854e2d4151a0b
     });
   
 }
