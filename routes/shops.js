@@ -12,7 +12,7 @@ import passport from '../middlewares/passport.js';
 import alreadyExists from '../middlewares/shops/alreadyExists.js'
 import is_activeMe from '../middlewares/shops/is_activeMe.js'
 import is_active from '../middlewares/shops/is_active.js'
-import getAllProductsController from "../controllers/Products/get_all.js"
+import getAllProductsController from "../controllers/products/get_all.js"
 // CART
 import createCartProductController from '../controllers/products_in_carts/create.js'
 import getAllProductsInCart from '../controllers/products_in_carts/get_all.js'
