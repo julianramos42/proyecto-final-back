@@ -21,17 +21,17 @@ async function createMailTransporterPay(userPayment) {
 
     let productsName = "";
     products.forEach((product) => {
-        productsName += `<li style="font-family:'Montserrat', sans-serif;font-weight: 400;font-size: 12px;color:#495464;margin-bottom: 5px;">${product.title}</li>`;
+        productsName += `<li style="font-family:'Montserrat', sans-serif;font-weight: 400;font-size: 12px;color:#495464;min-height: 20px;margin-bottom: 5px;">${product.title}</li>`;
     });
 
     let productsPrice = "";
     products.forEach((product) => {
-        productsPrice += `<li style="font-family:'Montserrat', sans-serif;font-weight: 400;font-size: 12px;color:#495464;margin-bottom: 5px;">$${product.unit_price}</li>`;
+        productsPrice += `<li style="font-family:'Montserrat', sans-serif;font-weight: 400;font-size: 12px;color:#495464;min-height: 20px;margin-bottom: 5px;">$${product.unit_price}</li>`;
     });
 
     let productsQuantity = "";
     products.forEach((product) => {
-        productsQuantity += `<li style="font-family:'Montserrat', sans-serif;font-weight: 400;font-size: 12px;color:#495464;margin-bottom: 5px;">${product.quantity}</li>`;
+        productsQuantity += `<li style="font-family:'Montserrat', sans-serif;font-weight: 400;font-size: 12px;color:#495464;min-height: 20px;margin-bottom: 5px;">${product.quantity}</li>`;
     });
 
     // send mail with defined transport object
