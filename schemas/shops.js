@@ -84,6 +84,16 @@ const schema = Joi.object({
                 'string.uri': 'A valid URL is necessary'
             }
         ),
+    phone : Joi
+        .string()
+        .pattern(/^\d{10}$/)
+        .required()
+        .messages(
+            {
+                'string.empty': 'The phone cannot be empty',
+                'any.required': 'A phone is required',
+            }
+        ),
     banner: Joi
         .string()
         .required()
