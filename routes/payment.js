@@ -16,7 +16,7 @@ router.post("/",cors(), (req, res) => {
     let preference = {
       items: req.body.products,
       back_urls: {
-        success: `http://localhost:3000/shop/${req.body.shopId}`,
+        success: `https://lance-app.vercel.app/shop/${req.body.shopId}`,
         failure: "",
         pending: "",
       },
