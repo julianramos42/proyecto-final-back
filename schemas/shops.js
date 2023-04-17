@@ -87,7 +87,13 @@ const schema = Joi.object({
     phone : Joi
         .string()
         .pattern(/^\d{10}$/)
-        .required(),
+        .required()
+        .messages(
+            {
+                'string.empty': 'The phone cannot be empty',
+                'any.required': 'A phone is required',
+            }
+        ),
     banner: Joi
         .string()
         .required()
